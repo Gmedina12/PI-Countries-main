@@ -12,7 +12,7 @@ Temporada (Verano, Otoño, Invierno o Primavera). *
 */
 module.exports = (sequelize) => {
     // defino el modelo
-    sequelize.define('Country', {
+    sequelize.define('Activity', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
