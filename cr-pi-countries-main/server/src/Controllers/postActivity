@@ -1,0 +1,34 @@
+const { Activity, Country } = require('../db')
+
+const postActivity = async (req, res) => {
+    try {
+        const { ID, name, difficulty, duration, season, countries } = req.body
+
+        const newActivity = await Activity.create({
+            ID,
+            name,
+            difficulty,
+            duration,
+            season,
+
+        })
+        const activitiesXCountries = await Promise.all(countries.map(async (country) => {
+            const countryDB = await Country.findOne({
+                where: {
+                    ID: country
+                }
+            })
+            const relationActXCount = await newActivity.addCountry(countryDB)
+            return relationActXCount
+        }))
+        res.status(200).json(activitiesXCountries)
+    }
+    catch (error) {
+        res.status(500).json({ error: error.message })
+        console.log(error.message)
+    }
+}
+
+module.exports = {
+    postActivity,
+}

@@ -4,26 +4,26 @@ const { DataTypes } = require('sequelize');
 /** 
  * MODELO 2 | Activity
 
-ID. *
-Nombre. *
-Dificultad (número del 1 al 5). *
+ID. * (obligatorio)
+Nombre. * (obligatorio)
+Dificultad (número del 1 al 5). * (obligatorio)
 Duración (en horas).
-Temporada (Verano, Otoño, Invierno o Primavera). *
+Temporada (Verano, Otoño, Invierno o Primavera). *(obligatorio)
 */
 module.exports = (sequelize) => {
     // defino el modelo
     sequelize.define('Activity', {
-        id: {
+        ID: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             allowNull: false,
             autoIncrement: true
         },
-        nombre: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        dificultad: {
+        difficulty: {
             type: DataTypes.SMALLINT,
             allowNull: false,
             validate: {
@@ -31,10 +31,10 @@ module.exports = (sequelize) => {
                 max: 5
             }
         },
-        duracion: {
+        duration: {
             type: DataTypes.SMALLINT,
         },
-        temporada: {
+        season: {
             type: DataTypes.ENUM('Verano','Primavera', 'Invierno', 'Otoño'),
             allowNull: false
         }
