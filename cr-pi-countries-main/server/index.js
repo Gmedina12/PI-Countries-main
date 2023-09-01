@@ -24,6 +24,7 @@ server.listen(PORT, async () => {
         area: area,
         population: population
       }
+    
     })
   })
   

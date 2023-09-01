@@ -12,8 +12,7 @@ const getCountryById = async (req, res) => {
             },
             include: {
                 model: Activity,
-                attributes: ['ID', 'name', 'difficulty','duration','season'], //Nombres de las filas de la tabla
-                
+                attributes: ['ID', 'name', 'difficulty','duration','season'], 
              } 
         });
 
