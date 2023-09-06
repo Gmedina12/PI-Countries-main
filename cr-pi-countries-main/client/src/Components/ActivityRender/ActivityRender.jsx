@@ -8,6 +8,7 @@ const Activities = ({activities, onClose}) => {
                <Activity
                   key={activity.ID}
                   id={activity.ID}
+                  picture={activity.picture}
                   name={activity.name}
                   difficulty={activity.difficulty}
                   duration={activity.duration}

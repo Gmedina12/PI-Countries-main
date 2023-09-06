@@ -20,16 +20,16 @@ const Detail = () => {
     return (
         <div>
             {activity?.ID ?<h2>{activity.ID}</h2>:''}
+            {activity?.picture?<img src ={character.image} alt=""/>:''}
             {activity?.name ?<h2>{name}</h2>:''}
             {activity?.difficulty ?<h2>{activity.difficulty}</h2>:''}
             {activity?.duration ?<h2>{activity.duration}</h2>:''}
             {activity?.season?<h2>{activity.season}</h2>:''}
             
-
-
-
         </div>
     )
+        
+    
 }
 
 export default Detail;

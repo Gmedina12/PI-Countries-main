@@ -1,26 +1,34 @@
-import { Route,Routes } from 'react-router-dom'
-
+import { BrowserRouter, Route,Routes } from 'react-router-dom'
 import './App.css'
-import postActivity from './Components/Activity/postActivity'
+
+// import postActivity from './Components/Activity/postActivity'
 import Home from './Components/Home/Home'
 import CountryDetails from './Components/Details/CountryDetails'
 import ActivityDetails from './Components/Details/ActivityDetails'
 import LandingPage from './Components/Landing/LandingPage'
+import Countries from './Components/CountryRender/CountryRender'
+import Activities from './Components/ActivityRender/ActivityRender'
+import About from './Components/About/About'
 
 function App() {
   return (
-    
-    <div className="App">
+    <BrowserRouter>
+       <div className="App">
       <Routes>
-        <Route path= '/' element = {LandingPage}/>
-        <Route path= '/home' element = {Home}/>
-        <Route path= '/countries/:id' element= {CountryDetails}/>
-        <Route path='/countries/name' element= {CountryDetails}/>
-        <Route path= '/form' element= {postActivity}/>
-        <Route path= '/activities/name' element= {ActivityDetails}/>
+        <Route path= '/' Component = {LandingPage}/>
+        <Route path= '/home' Component = {Home}/>
+        <Route path= '/about' Component = {About}/>
+        <Route path='/countries' Component = {Countries}/> 
+        <Route path= '/countries/:id' Component= {CountryDetails}/>
+        <Route path='/countries/name' Component= {CountryDetails}/>
+        {/* <Route path= '/form' Component= {postActivity}/> */}
+        <Route path='/activities' Component = {Activities}/> 
+        <Route path= '/activities/name' Component= {ActivityDetails}/>
       </Routes>
       
     </div>
+    </BrowserRouter>
+   
     
   );
 }

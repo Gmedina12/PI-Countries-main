@@ -2,12 +2,12 @@ import axios from 'axios';
 import Country from '../Country/Country'
 import { useEffect } from 'react';
 
-useEffect(()=>{
-   axios('http://localhost:3001/countries')
-   .then(({data})=>{
-      setCountries(data)
-   })
-}, [])
+// useEffect(()=>{
+//    axios('http://localhost:3001/countries')
+//    .then(({data})=>{
+//       setCountries(data)
+//    })
+// }, [])
 
 const Countries = ({countries}) => {
    const allCountries = countries.slice(selector * 10 - 10, selector * 10)
