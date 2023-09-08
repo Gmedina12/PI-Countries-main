@@ -7,6 +7,9 @@ export default (input) => {
     errors.e2 = 'Name is missing'
    }
    if (input.name.length < 5){
-    errors.e3 = "Activity's name is too short. Please type a full activity"
+    errors.e3 = "Activity's name is too short. Please, try to type a good description"
+   }
+   if(isNaN(input.duration)){
+    errors.e4 = 'Type a number'
    }
 }

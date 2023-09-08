@@ -3,11 +3,12 @@ const {conn} = require ('../db')
 
 const postActivity = async (req, res) => {
   try {
-    const { name, difficulty, duration, season, countries } = req.body;
+    const { name, picture, difficulty, duration, season, countries } = req.body;
 
     const [activity, created] = await Activity.findOrCreate({
       where: { name }, 
       defaults: {
+        picture,
         difficulty,
         duration,
         season,

@@ -1,4 +1,5 @@
 const { Activity } = require('../db')
+const { conn } = require ('../db')
 
 const deleteActivity = async (req,res) => {
 try{
@@ -18,9 +19,6 @@ catch (error){
 }
        
     }
-
-
-
 
 module.exports = {
     deleteActivity

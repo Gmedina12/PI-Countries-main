@@ -1,7 +1,7 @@
 import { BrowserRouter, Route,Routes } from 'react-router-dom'
 import './App.css'
 
-// import postActivity from './Components/Activity/postActivity'
+import PostActivity from './Components/Activity/postActivity'
 import Home from './Components/Home/Home'
 import CountryDetails from './Components/Details/CountryDetails'
 import ActivityDetails from './Components/Details/ActivityDetails'
@@ -21,7 +21,7 @@ function App() {
         <Route path='/countries' Component = {Countries}/> 
         <Route path= '/countries/:id' Component= {CountryDetails}/>
         <Route path='/countries/name' Component= {CountryDetails}/>
-        {/* <Route path= '/form' Component= {postActivity}/> */}
+        <Route path= '/form' Component= {PostActivity}/>
         <Route path='/activities' Component = {Activities}/> 
         <Route path= '/activities/name' Component= {ActivityDetails}/>
       </Routes>

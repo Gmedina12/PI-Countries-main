@@ -1,90 +1,108 @@
-import React from 'react';
-import { useDispatch, useState } from 'react-redux';
 
+import React, { useState } from 'react'
+import Validation from '../Validation/Validation'
 
-const postActivity = () => {
-      const dispatch = useDispatch();
-      const [input, setInput] = useState({
-            name: '',
-            picture: '',
-            reglas: '',
-            difficulty: '',
-            duration: '',
-            season: '',
-            
-      });
-      const [error, setError] = useState({});
+const PostActivity = () => {
 
-      function validation(input) {
-            let error = {};
+  const [state, setState] = useState({
+    name: '',
+    picture: '',
+    difficulty: 0,
+    duration: 0,
+    season: ''
+  })
 
-            if (input.nombre.length > 30) {
-                  error.nombre = 'Nombre demasiado largo';
-            }
+  const [error, setError] = useState({
+    name: 'Name is required',
+    duration: '',
+    picture: ''
+  })
 
-            if (input.descripcion.length < 100) {
-                  error.descripcion = 'Descripción demasiada corta';
-            }
-            if (input.reglas.length < 50) {
-                  error.reglas = 'El texto de las reglas deben ser más largas'
-            }
-            return error;
+  const validate = (stateAux, name) => {
+     switch (name) {
+      case name: {
+        if (!stateAux.name) setError({ ...error, name: 'Name is required' })
+        else setError({ ...error, name: '' })
       }
+      case picture: {
+        const regex = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
+        if (regex.test(stateAux.picture)) {
+          setError({ ...error, picture: '' })
+        } else {
+          setError({ ...error, picture: 'Invalid URL' })
+        }
+      }
+      case duration: {
+        if (isNaN(parseInt(stateAux.duration))) {
+          setError({ ...error, duration: 'Invalid entry. It must be a number' })
+        } else setError({ ...error, duration: '' })
+      }
+      default: {
 
-      const handleChange = (event) => {
-            const name = event.target.name;
-            const value = event.target.value;
+      }
+    }
+  }
 
-            setInput({
-                  ...input,
-                  [name]: value
-            });
 
-            setError(validation({
-                  ...input,
-                  [name]: value
-            }))
-      };
+const disableFunction = () => {
+  let disabledAux = true;
+  for (let err in error) {
+    if (error[err] === '') disabledAux = false;
+    else {
+      disabledAux = true;
+      break;
+    }
+  }
+  return disabledAux;
+}
 
-      const handleSubmit = (event) => {
-            event.preventDefault();
+const handleChange = (event) => {
+  setState({
+    ...state,
+    [event.target.name]: event.target.value
+  })
+  validate({
+    ...state,
+    [event.target.name]: event.target.value
+  }, event.target.name)
+}
 
-            if (Object.keys(error).length === 0) {
-                  dispatch(actions.createDeporte(input));
-            }
-      };
-      return (
-            <form onSubmit={handleSubmit}>
-                  <label>Nombre: </label>
-                  <input type='text' name='Nombre'></input>
-                  <input type="text" name="nombre" value={input.nombre} onChange={handleChange} />
-                  {error.nombre && <p>{error.nombre}</p>}
+const handleSubmit = (event) => {
+  event.preventDefault()
 
-                  <label>Descripción: </label>
-                  <textarea name="descripcion" value={input.descripcion} onChange={handleChange} />
-                  {error.descripcion && <p>{error.descripcion}</p>}
+}
 
-                  <label>Reglas: </label>
-                  <input type="text" name="reglas" value={input.reglas} onChange={handleChange} />
-                  {error.reglas && <p>{error.reglas}</p>}
 
-                  <label>Imagen: </label>
-                  <input type="text" name="imagen" value={input.imagen} onChange={handleChange} />
+return (
+  <div>
+    {console.log(error)}
+    <form onSubmit={handleSubmit}>
+      <label>Name: </label>
+      <input name='name' onChange={handleChange} type="text" />
+      <label>{error.name}</label>
+      <label>Picture: </label>
+      <input name='picture' onChange={handleChange} type="text" />
+      <label>{error.picture}</label>
+      <label>Difficulty: </label>
+      <select>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+      {/* <input name='difficulty' onChange={handleChange} type="text" /> */}
+      <label>{error.difficulty}</label>
+      <label>Duration in hours: </label>
+      <input name='duration' onChange={handleChange} type="text" />
+      <label>{error.difficulty}</label>
+      <label>Season: </label>
+      <input name='season' onChange={handleChange} type="text" />
+      <label>{error.difficulty}</label>
+      <input disabled={disableFunction()} type="submit" />
+    </form>
+  </div>
+)
 
-                  <label>Equipamiento: </label>
-                  <input type="text" name="equipamiento" value={input.equipamiento} onChange={handleChange} />
-
-                  <label>Lugar de origen: </label>
-                  <input type="text" name="lugar_de_origen" value={input.lugar_de_origen} onChange={handleChange} />
-
-                  <label>Liga destacada: </label>
-                  <input type="text" name="liga_destacada" value={input.liga_destacada} onChange={handleChange} />
-
-                  <button type="submit">Crear deporte</button>
-
-            </form>
-      );
-
-};
-
-export default postActivity;
+}
+export default PostActivity

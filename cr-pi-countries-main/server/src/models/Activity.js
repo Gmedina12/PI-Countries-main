@@ -23,6 +23,9 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        picture: {
+            type:DataTypes.TEXT
+        },
         difficulty: {
             type: DataTypes.SMALLINT,
             allowNull: false,
