@@ -21,7 +21,7 @@
      return (
         <div>
            <input onChange = {handleChange}  type='search' />
-           <button onClick={() => handlerClick()}>Search</button>
+           <button onClick={handlerClick}>Search</button>
         </div>
      );
   }

@@ -28,7 +28,7 @@ const PostActivity = () => {
     duration: '*',
     picture: '',
     season: '*',
-    countries: []
+    countries: 'Where will we do this activity? Choose at least one country'
   })
 
   const validate = (stateAux, name) => {
@@ -67,7 +67,9 @@ const PostActivity = () => {
         else setError({ ...error, season: '' })
         break;
       case 'countries':
-        if (!stateAux.countries) setError({ ...error, countries: 'Where will we do this activity? Choose at least one country' })
+        if (stateAux.countries.length === 0) setError({ ...error, countries: 'Where will we do this activity? Choose at least one country' })
+        else setError({...error, countries: []})
+      break;
 
       default:
         break;
@@ -100,9 +102,11 @@ const PostActivity = () => {
 
   //Eliminar selección de países
   const handleDelete = (event) => {
+    if(state.countries.length <= 1) setError({...error, countries: 'Select a new country'})
     setState({
       ...state,
       [event.target.name]: [...state[event.target.name].filter(c => c !== event.target.id)]
+      
     })
   }
 
@@ -111,7 +115,7 @@ const PostActivity = () => {
 
     if (event.target.name === 'countries') { 
       if (!state.countries.includes(event.target.value)){
-        return setState({
+        setState({
           ...state,
           [event.target.name]: [...state[event.target.name], event.target.value]
         })
@@ -133,6 +137,18 @@ const PostActivity = () => {
   const handleSubmit = (event) => { 
     event.preventDefault()
     dispatch(postActivity(state))
+    setState ({ name: '',
+    picture: '',
+    difficulty: 0,
+    duration: 0,
+    season: '',
+    countries: []})
+    setError ({ name: '*',
+    difficulty: '*',
+    duration: '*',
+    picture: '',
+    season: '*',
+    countries: 'Where will we do this activity? Choose at least one country'})
   }
 
   return (
@@ -141,11 +157,11 @@ const PostActivity = () => {
       <form onSubmit={handleSubmit}>
 
         <label>name: </label>
-        <input name='name' onChange={handleChange} type="text" />
+        <input name='name' onChange={handleChange} type="text" value={state.name}/>
         <label>{error.name}</label>
 
         <label>Picture: </label>
-        <input name='picture' onChange={handleChange} type="text" />
+        <input name='picture' onChange={handleChange} type="text" value={state.picture}/>
         <label>{error.picture}</label>
 
         <label>Difficulty: </label>
@@ -160,7 +176,7 @@ const PostActivity = () => {
         <label>{error.difficulty}</label>
 
         <label>Duration in hours: </label>
-        <input name='duration' onChange={handleChange} type="text" />
+        <input name='duration' onChange={handleChange} type="text" value={state.duration} />
         <label>{error.duration}</label>
 
         <label>Season:</label>
@@ -176,6 +192,7 @@ const PostActivity = () => {
 
         <label>Countries: </label>
         <select onChange={handleChange} name='countries'>
+          <option>- Select a Country -</option>
           {allCountries?.map((c) => <option value={c.ID} key={c.ID}>{c.name}</option>)}
         </select>
         <div>

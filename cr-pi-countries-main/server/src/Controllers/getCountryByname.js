@@ -16,7 +16,7 @@ const getCountryByName = async (req, res,) => {
         through: { attributes: [] },
       },
     });
-    res.status(200).json({country})
+    res.status(200).json(country)
    
 }
     catch (error) {
