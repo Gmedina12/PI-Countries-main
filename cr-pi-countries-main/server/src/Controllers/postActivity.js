@@ -14,14 +14,15 @@ const postActivity = async (req, res) => {
         season,
       },
     });
-
+      console.log('Llegué antes de if')
      if (countries && countries.length > 0) {
       await activity.setCountries(countries);
     }
+    console.log('Llegué después del if')
 
     const activityWithCountries = await Activity.findOne({
-      where: { id: activity.id },
-      include: { model: Country },
+      where: { ID: activity.ID },
+      include: { model: Country },//SE QUEBRO
     });
 
     res.status(200).json(activityWithCountries);

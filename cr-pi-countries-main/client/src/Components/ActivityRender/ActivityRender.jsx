@@ -1,6 +1,6 @@
 import Activity from '../Activity/Activity'
 
-const Activities = ({activities, onClose}) => {
+const ActivityRender = ({activities}) => {
    return (
     <div>
       {activities.map((activity) => {
@@ -13,7 +13,6 @@ const Activities = ({activities, onClose}) => {
                   difficulty={activity.difficulty}
                   duration={activity.duration}
                   season={activity.season}
-                  onClose={onClose}
                />
             )
          }
@@ -22,4 +21,4 @@ const Activities = ({activities, onClose}) => {
     </div>);
 }
 
-export default Activities;
+export default ActivityRender;

@@ -3,11 +3,13 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const Detail = () => {
+const activityDetail = () => {
     const [activity, setActivity] = useState({});
-    const { ID, name } = useParams()
+    const { name } = useParams() //no estoy segura de usar useParams
+    
     useEffect(() => {
-        axios(`http://localhost:3001/${ID}`).then(({ data }) => {
+        axios(`http://localhost:3001/${name}`).then(({ data }) => { //correrig ruta no estoy segura
+
             if (data.name) {
                 setActivity(data);
             } else {
@@ -20,7 +22,7 @@ const Detail = () => {
     return (
         <div>
             {activity?.ID ?<h2>{activity.ID}</h2>:''}
-            {activity?.picture?<img src ={character.image} alt=""/>:''}
+            {activity?.picture?<img src ={activity.image} alt=""/>:''}
             {activity?.name ?<h2>{name}</h2>:''}
             {activity?.difficulty ?<h2>{activity.difficulty}</h2>:''}
             {activity?.duration ?<h2>{activity.duration}</h2>:''}
@@ -32,4 +34,6 @@ const Detail = () => {
     
 }
 
-export default Detail;
+export default activityDetail;
+
+

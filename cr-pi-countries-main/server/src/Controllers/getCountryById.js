@@ -1,8 +1,6 @@
 const { Country } = require('../db'); 
 const { Activity } = require('../db'); 
 
-
-
 const getCountryById = async (req, res) => {
     try {
         const { idPais } = req.params;
@@ -13,6 +11,7 @@ const getCountryById = async (req, res) => {
             include: {
                 model: Activity,
                 attributes: ['ID', 'name', 'difficulty','duration','season'], 
+                through: {attributes: []}
              } 
         });
 

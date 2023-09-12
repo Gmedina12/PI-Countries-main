@@ -1,36 +1,61 @@
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
 import Country from '../Country/Country'
-import { useEffect } from 'react';
+import { useSelector } from "react-redux";
 
-// useEffect(()=>{
-//    axios('http://localhost:3001/countries')
-//    .then(({data})=>{
-//       setCountries(data)
-//    })
-// }, [])
 
-const Countries = ({countries}) => {
-   const allCountries = countries.slice(selector * 10 - 10, selector * 10)
+
+const Countries = () => {
+   const countries = useSelector((state) => state.countries);
+   const [currentPage, setCurrentPage] = useState(0);
+
+   let nextPage = () => {
+      if (countries.length <= currentPage + 10) {
+         setCurrentPage(currentPage);
+      } else setCurrentPage(currentPage + 10);
+   };
+   let prevPage = () => {
+      if (currentPage < 10) {
+         setCurrentPage(0);
+      } else {
+         setCurrentPage(currentPage - 10);
+      }
+   };
+
+   const firstPage = () => {
+      setCurrentPage(0);
+   };
+
+   const lastPage = () => {
+      setCurrentPage(countries.length - 10);
+   };
+
+   useEffect(() => {
+      firstPage()
+   }, [countries]);
+
+
+   const filteredCountries = countries.slice(currentPage, currentPage + 10);
+   console.log(filteredCountries)
    return (
-    <div>
-         {countries.map((country) => {
-            return(
-               <Country
-                  key={country.id}
-                  id = {country.ID}
-                  name={country.name.common}
-                  flags={country.flags.png}
-                  continents={country.continents}
-                  capital={country.capital}
-                  subregion={country.subregion}
-                  area={country.area}
-                  population={country.population}
-               />
-            )
-         }
-         )
-      } 
-    </div>);
+      <div>
+         <button onClick={firstPage}> {'<<'} </button>
+         <button onClick={prevPage}>  {'<'}  </button>
+         <button onClick={nextPage}>  {'>'}  </button>
+         <button onClick={lastPage}>  {'>>'} </button>
+         <div>
+            {
+               filteredCountries.map((countryElement) => (
+                  <Country
+                     key={countryElement.ID}
+                     id={countryElement.ID}
+                     flags={countryElement.flags}
+                     name={countryElement.name}
+                     continents={countryElement.continents}
+                  />))}
+         </div>
+      </div>
+   );
 }
+
 
 export default Countries;

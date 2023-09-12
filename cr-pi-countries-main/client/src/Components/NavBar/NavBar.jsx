@@ -1,4 +1,4 @@
-import SearchBar from '../SearchBar/SerachBar'
+import SearchBar from '../SearchBar/SearchBar'
 import { Link } from "react-router-dom";
 
 const NavBar = (props) => {

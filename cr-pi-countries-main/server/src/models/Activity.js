@@ -24,7 +24,8 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         picture: {
-            type:DataTypes.TEXT
+            type:DataTypes.TEXT,
+            allowNull:false
         },
         difficulty: {
             type: DataTypes.SMALLINT,
@@ -38,7 +39,7 @@ module.exports = (sequelize) => {
             type: DataTypes.SMALLINT,
         },
         season: {
-            type: DataTypes.ENUM('Verano','Primavera', 'Invierno', 'Otoño'),
+            type: DataTypes.ENUM('Summer','Spring', 'Winter', 'Fall'),
             allowNull: false
         }
     });

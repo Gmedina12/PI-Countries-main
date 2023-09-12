@@ -1,31 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
- const Country = ({ flags, ID, name, continent }) => {
-   return(
-       <div>
-             <div><img src={flags} alt="Image not available" /></div>
-            <h3>{ID}</h3>
-            <h3>{name}</h3>
-           <h3>{continent}</h3>   
+const Country = ({ flags, name, continents, id, Activities }) => {
+    return (
+        <div>
+        <Link to={`/countries/${id}`}>
+        <h2>{name}</h2>
+        <div>
+            <img src={flags} alt="Image no available"/>
         </div>
-   )
-}
-// const Country = ({ countries }) => {
-//   return (
-//     <div>
-//       <h1>Discover every country in the world</h1>
-//       {countries.map((country) => (
-//         <Country
-//           key={country.ID} 
-//           flags={country.flags.png}
-//           name={country.name.common}
-//           capital={country.capital}
-//           population={country.population}
-//         />
-//       ))}
-//     </div>
-//   );
-// }
+        <h2>{continents}</h2>
+        <h2>{Activities}</h2>
+        </Link>
+        </div> 
+    );
+};
 
-
-export default Country 
+export default Country;
