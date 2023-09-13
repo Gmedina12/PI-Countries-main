@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
+import style from './Home.module.css'
 
 import {
   getCountries,
@@ -61,8 +62,8 @@ const Home = () => {
   }, [])
 
   return (
-    <div>
-      <div>
+    <div className={style.homeBackGround}>
+      <div className={style.homeFilters}>
         <select name='continents' onChange={handlerChange}>
           <option value="All Continents"> All Continents </option>
           <option value="Africa"> Africa </option>
@@ -86,12 +87,12 @@ const Home = () => {
         </select>
 
         <select onChange={handlerChange} name='activities'>
-          <option>Select activity</option>
+          <option value='null'>Select activity</option>
           {allActivities?.map((act) => <option value={act.ID} key={act.ID}>{act.name}</option>)}
         </select>
         
       </div>
-      <div>
+      <div className={style.countriesContainer}>
         <Countries />
       </div>
     </div>

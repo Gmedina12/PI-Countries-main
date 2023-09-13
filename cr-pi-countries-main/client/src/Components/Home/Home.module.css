@@ -1,0 +1,16 @@
+.homeBackGround{
+    height: 100%;
+    width: 100vw;
+    background: rgb(255,255,255);
+background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(171,217,255,1) 53%);
+}
+.countriesContainer{
+    display: flex;
+    align-items: start;
+    height: auto;
+    width: auto;
+}
+.homeFilters{
+    position: sticky;
+    top: 80px;
+}

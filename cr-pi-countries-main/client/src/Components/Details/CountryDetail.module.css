@@ -1,0 +1,37 @@
+.countryDetails{
+    padding-top: 150px;
+    width: 100vw;
+    height: 100vh;
+    left: -300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+   
+    /* cambria aquí */
+}
+.countryInfo{
+    display: grid;
+    grid-template-columns: max-content max-content;
+    background-color: #35a29e33;
+    padding: 3px 10px;
+    /* border: #088395 5px double;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px; */
+    border: white 8px inset;
+    align-items: center;
+    
+}
+.countryData{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-right: auto;
+    align-items: start;
+    margin-left: 20px;
+    
+}
+
+.flags{
+    border-radius: 10px;
+}

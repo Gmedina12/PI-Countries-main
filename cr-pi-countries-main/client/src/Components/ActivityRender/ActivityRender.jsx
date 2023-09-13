@@ -1,8 +1,9 @@
 import Activity from '../Activity/Activity'
+import style from './ActivityRender.module.css'
 
 const ActivityRender = ({activities}) => {
    return (
-    <div>
+    <div className={style.activityRenderContainer}>
       {activities.map((activity) => {
             return(
                <Activity

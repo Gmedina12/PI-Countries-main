@@ -1,0 +1,14 @@
+.countryRenderAll{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(3,1fr);
+    gap: 15px;
+}
+.renderContainer{
+    margin: 150px auto;
+}
+
+.filterButtons{
+    margin: 15px;
+}

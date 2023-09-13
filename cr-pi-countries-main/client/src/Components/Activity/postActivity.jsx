@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { postActivity, getCountries } from '../Redux/Action/index'
+import style from './PostActivity.module.css'
 
 const PostActivity = () => {
 
@@ -59,7 +59,7 @@ const PostActivity = () => {
         if (!REGEX_URL.test(stateAux.picture)) {
           setError({ ...error, picture: 'Invalid URL' })
         } else {
-          setError({ ...error, picture: '' }) 
+          setError({ ...error, picture: '' })
         }
         break
       case 'season':
@@ -68,8 +68,8 @@ const PostActivity = () => {
         break;
       case 'countries':
         if (stateAux.countries.length === 0) setError({ ...error, countries: 'Where will we do this activity? Choose at least one country' })
-        else setError({...error, countries: []})
-      break;
+        else setError({ ...error, countries: [] })
+        break;
 
       default:
         break;
@@ -102,19 +102,18 @@ const PostActivity = () => {
 
   //Eliminar selección de países
   const handleDelete = (event) => {
-    if(state.countries.length <= 1) setError({...error, countries: 'Select a new country'})
+    if (state.countries.length <= 1) setError({ ...error, countries: 'Select a new country' })
     setState({
       ...state,
-      [event.target.name]: [...state[event.target.name].filter(c => c !== event.target.id)]
-      
+      [event.target.name]: state.countries.filter(c => c !== event.target.id)
     })
   }
 
   //Manejador de cambios de los países seleccionados
-  const handleChange = (event) => { 
+  const handleChange = (event) => {
 
-    if (event.target.name === 'countries') { 
-      if (!state.countries.includes(event.target.value)){
+    if (event.target.name === 'countries') {
+      if (!state.countries.includes(event.target.value)) {
         setState({
           ...state,
           [event.target.name]: [...state[event.target.name], event.target.value]
@@ -123,7 +122,7 @@ const PostActivity = () => {
     } else {
       setState({
         ...state,
-        [event.target.name]: event.target.value 
+        [event.target.name]: event.target.value
       })
     }
 
@@ -134,75 +133,90 @@ const PostActivity = () => {
   }
 
   //Control del envío del formulario
-  const handleSubmit = (event) => { 
+  const handleSubmit = (event) => {
     event.preventDefault()
     dispatch(postActivity(state))
-    setState ({ name: '',
-    picture: '',
-    difficulty: 0,
-    duration: 0,
-    season: '',
-    countries: []})
-    setError ({ name: '*',
-    difficulty: '*',
-    duration: '*',
-    picture: '',
-    season: '*',
-    countries: 'Where will we do this activity? Choose at least one country'})
+    setState({
+      name: '',
+      picture: '',
+      difficulty: 0,
+      duration: 0,
+      season: '',
+      countries: []
+    })
+    setError({
+      name: '*',
+      difficulty: '*',
+      duration: '*',
+      picture: '',
+      season: '*',
+      countries: 'Where will we do this activity? Choose at least one country'
+    })
   }
 
   return (
     //Render form
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className={style.formContainer}>
+      <form onSubmit={handleSubmit} className={style.form}>
 
-        <label>name: </label>
-        <input name='name' onChange={handleChange} type="text" value={state.name}/>
-        <label>{error.name}</label>
-
-        <label>Picture: </label>
-        <input name='picture' onChange={handleChange} type="text" value={state.picture}/>
-        <label>{error.picture}</label>
-
-        <label>Difficulty: </label>
-        <select name='difficulty' onChange={handleChange}>
-          <option value=''>-</option>
-          <option value='1'>1</option>
-          <option value='2'>2</option>
-          <option value='3'>3</option>
-          <option value='4'>4</option>
-          <option value='5'>5</option>
-        </select>
-        <label>{error.difficulty}</label>
-
-        <label>Duration in hours: </label>
-        <input name='duration' onChange={handleChange} type="text" value={state.duration} />
-        <label>{error.duration}</label>
-
-        <label>Season:</label>
-        <select onChange={handleChange} name='season'>
-          <option value=''>Select Season</option>
-          <option value='Summer'>Summer</option>
-          <option value='Spring'>Spring</option>
-          <option value='Winter'>Winter</option>
-          <option value='Fall'>Fall</option>
-        </select>
-        <label>{error.season}</label>
-
-
-        <label>Countries: </label>
-        <select onChange={handleChange} name='countries'>
-          <option>- Select a Country -</option>
-          {allCountries?.map((c) => <option value={c.ID} key={c.ID}>{c.name}</option>)}
-        </select>
         <div>
-          {
-            state.countries?.map((c) => <div>
-              <label key={state.name}>{c}</label> <button name='countries' id={c} onClick={handleDelete}>x</button>
-            </div>)
-          }
+          <label>name: </label>
+          <input name='name' onChange={handleChange} type="text" value={state.name} />
+          <label>{error.name}</label>
         </div>
-        <label>{error.countries}</label>
+
+        <div>
+          <label>Picture: </label>
+          <input name='picture' onChange={handleChange} type="text" value={state.picture} />
+          <label>{error.picture}</label>
+        </div>
+
+        <div>
+          <label>Difficulty: </label>
+          <select name='difficulty' onChange={handleChange}>
+            <option value=''>-</option>
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+            <option value='4'>4</option>
+            <option value='5'>5</option>
+          </select>
+          <label>{error.difficulty}</label>
+        </div>
+
+        <div>
+          <label>Duration in hours: </label>
+          <input name='duration' onChange={handleChange} type="text" value={state.duration} />
+          <label>{error.duration}</label>
+        </div>
+
+        <div>
+          <label>Season:</label>
+          <select onChange={handleChange} name='season'>
+            <option value=''>Select Season</option>
+            <option value='Summer'>Summer</option>
+            <option value='Spring'>Spring</option>
+            <option value='Winter'>Winter</option>
+            <option value='Fall'>Fall</option>
+          </select>
+          <label>{error.season}</label>
+        </div>
+        <div>
+          <label>Countries: </label>
+          <select onChange={handleChange} name='countries'>
+            <option>- Select a Country -</option>
+            {allCountries?.map((c) => <option value={c.ID} key={c.ID}>{c.name}</option>)}
+          </select>
+          <div>
+            {
+              state.countries?.map((c) => <div>
+                <label key={state.name}>{c}</label> <button name='countries' id={c} onClick={handleDelete}>x</button>
+              </div>)
+            }
+          </div>
+          <label>{error.countries}</label>
+        </div>
+
         {handlerDisable ? <input disabled type="submit" /> : <input type="submit" />}
       </form>
     </div>
@@ -210,5 +224,3 @@ const PostActivity = () => {
 
 }
 export default PostActivity
-
-//EST0OY TRANTANDO EL POST COMO UN ARREGLO-- PUSH ACTIVIDADES -- REVISA EL ACTION

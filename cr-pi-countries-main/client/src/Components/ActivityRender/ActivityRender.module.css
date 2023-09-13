@@ -1,0 +1,7 @@
+.activityRenderContainer{
+    width: 90vw;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}

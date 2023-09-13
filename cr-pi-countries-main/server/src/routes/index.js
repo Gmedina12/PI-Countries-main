@@ -14,6 +14,6 @@ router.get('/countries/:idPais',getCountryById)//done
 router.post('/activities', postActivity)//fixed
 router.get('/activities/name',getActivityByName)//pending
 router.get('/activities',getAllActivities)//done
-router.delete('/activities/:idAtivities', deleteActivity)//pending
+router.delete('/activities/:idActivity', deleteActivity)//pending
 
 module.exports = router;

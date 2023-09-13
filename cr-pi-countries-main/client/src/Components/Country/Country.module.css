@@ -1,0 +1,27 @@
+.countryContainerHome {
+    width: 300px;
+    height: max-content;
+    background-color: #FFFF;
+    padding-bottom: 10px;
+    border-radius: 7px;
+    border: 1px solid #204768;
+    transition-property: all;
+    transition-duration: 200ms;
+    
+}
+.countryContainerHome:hover{
+    transform: scale(1.05);
+    box-shadow: 1px 1px 3px 1px #088395;
+}
+.countryFlags{
+    width: 200px;
+    height: 120px;
+}
+.countryName{
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #071952;
+
+}

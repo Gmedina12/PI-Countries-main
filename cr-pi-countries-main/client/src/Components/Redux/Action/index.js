@@ -14,7 +14,7 @@
         POST_ACTIVITY,
         FILTER_BY_ACT
         
-    } from '../Action/action-types'
+    } from './action-types'
 
     //Consulta de todos los países
     export const getCountries = () =>{
@@ -138,8 +138,10 @@
             try{
                 const newActivity = await axios.post('http://localhost:3001/activities',activity)
                 console.log('Pasé por el axios', newActivity.data)
+                window.alert('You have added a new activity for vacations')
                 dispatch({type: POST_ACTIVITY,
                         payload: newActivity.data})
+                
             }
             catch(error){
                 console.log(error.message)

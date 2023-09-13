@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Country from '../Country/Country'
 import { useSelector } from "react-redux";
-
+import style from './CountryRender.module.css'
 
 
 const Countries = () => {
@@ -37,12 +37,14 @@ const Countries = () => {
    const filteredCountries = countries.slice(currentPage, currentPage + 10);
    console.log(filteredCountries)
    return (
-      <div>
-         <button onClick={firstPage}> {'<<'} </button>
-         <button onClick={prevPage}>  {'<'}  </button>
-         <button onClick={nextPage}>  {'>'}  </button>
-         <button onClick={lastPage}>  {'>>'} </button>
-         <div>
+      <div className={style.renderContainer}>
+         <div className={style.filterButtons}>
+            <button onClick={firstPage}> ⏮️ </button>
+            <button onClick={prevPage}>  ◀️  </button>
+            <button onClick={nextPage}>  ▶️  </button>
+            <button onClick={lastPage}>  ⏭️ </button>
+         </div>
+         <div className={style.countryRenderAll}>
             {
                filteredCountries.map((countryElement) => (
                   <Country
@@ -52,6 +54,12 @@ const Countries = () => {
                      name={countryElement.name}
                      continents={countryElement.continents}
                   />))}
+         </div>
+         <div className={style.filterButtons}>
+            <button onClick={firstPage}> ⏮️ </button>
+            <button onClick={prevPage}>  ◀️  </button>
+            <button onClick={nextPage}>  ▶️  </button>
+            <button onClick={lastPage}>  ⏭️ </button>
          </div>
       </div>
    );

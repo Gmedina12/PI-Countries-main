@@ -8,7 +8,6 @@ import {
     ORD_POPULATION_DESC,
     ORD_BY_CONTINENT, //filtro
     GET_ACTIVITIES,
-    GET_ACTIVITY_BY_NAME,//added
     DELETE_ACTIVITY,//added
     POST_ACTIVITY,
     FILTER_BY_ACT
@@ -87,9 +86,10 @@ const rootReducer = (state = initialState, action) => {
         }
 
         case FILTER_BY_ACT: {
+            if(action.payload === 'null') return {...state, countries: state.allCountries} 
             return {
                 ...state,
-                countries: state.countries.filter((country) => {
+                countries: state.allCountries.filter((country) => {
                     return country.Activities.some((activity) => activity.ID === parseInt(action.payload))
                 })
             }

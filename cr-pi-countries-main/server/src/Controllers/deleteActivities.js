@@ -3,13 +3,13 @@ const { conn } = require ('../db')
 
 const deleteActivity = async (req,res) => {
 try{
-    const {id} = req.query
-    const activityToDelete = await Activity.findByPk(id)
+    const {idActivity} = req.params
+    const activityToDelete = await Activity.findOne({where: {ID: parseInt(idActivity)}})
     if (!activityToDelete) {
         res.status(404).json({ error: 'Error 404: Not found' })
     }
     else {
-        await activity.destroy();
+        await Activity.destroy({where: {ID: parseInt(idActivity)}})
         res.status(200).json({message: 'Activity was deleted successfully'})
     }
 }
