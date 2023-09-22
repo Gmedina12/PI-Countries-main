@@ -1,15 +1,18 @@
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
-import { deleteActivity } from "../Redux/Action";
+import { useLocation, useNavigate } from "react-router-dom";
+import { deleteActivity, getActivities } from "../Redux/Action";
 import style from './Activity.module.css'
 
 const Activity = ({ id, name, picture, difficulty, duration, season }) => {
     const location = useLocation().pathname
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
 const handlerDelete =()=>{
     console.log('muestra el ID', id)
     dispatch(deleteActivity(id))
+    navigate('/home')
+    
 }
 
     return(

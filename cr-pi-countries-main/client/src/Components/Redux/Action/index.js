@@ -124,6 +124,7 @@
         return async (dispatch)=>{
             try{
                 await axios.delete(`http://localhost:3001/activities/${id}`)
+                window.alert('You just deleted an activity')
                 dispatch({type: DELETE_ACTIVITY, payload: id})
             }
             catch(error){

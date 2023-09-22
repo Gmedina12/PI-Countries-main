@@ -41,12 +41,10 @@ const PostActivity = () => {
         console.log(REGEX_SYMBOL.test(stateAux.Name))
         if (REGEX_SYMBOL.test(stateAux.Name)) setError({ ...error, name: 'Symbols are not allowed' })
         else if (!stateAux.name.length) setError({ ...error, name: 'name is required' })
+        else if (stateAux.name.length > 30) setError({...error, name: 'Activity name too long'})
         else setError({ ...error, name: '' })
         break;
-      case 'difficulty':
-        if (!stateAux.difficulty) setError({ ...error, difficulty: 'We need to know how hard it is' })
-        else setError({ ...error, difficulty: '' })
-        break;
+
       case 'duration':
         if (isNaN(parseInt(stateAux.duration))) {
           setError({ ...error, duration: 'Invalid entry. It must be a number' })
@@ -54,6 +52,7 @@ const PostActivity = () => {
         if (!stateAux.duration) setError({ ...error, duration: 'How long is your activity? It must be typed' })
         else setError({ ...error, duration: '' })
         break;
+
       case 'picture':
         const REGEX_URL = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
         if (!REGEX_URL.test(stateAux.picture)) {
@@ -62,10 +61,12 @@ const PostActivity = () => {
           setError({ ...error, picture: '' })
         }
         break
+
       case 'season':
         if (!stateAux.season) setError({ ...error, season: 'Please, select a season. We need to know when to enjoy this activity' })
         else setError({ ...error, season: '' })
         break;
+
       case 'countries':
         if (stateAux.countries.length === 0) setError({ ...error, countries: 'Where will we do this activity? Choose at least one country' })
         else setError({ ...error, countries: [] })
@@ -160,14 +161,14 @@ const PostActivity = () => {
       <form onSubmit={handleSubmit} className={style.form}>
 
         <div>
-          <label>name: </label>
-          <input name='name' onChange={handleChange} type="text" value={state.name} />
+          <label>Activity: </label>
+          <input name='name' onChange={handleChange} type="text" value={state.name} placeholder="Activity's name" />
           <label>{error.name}</label>
         </div>
 
         <div>
           <label>Picture: </label>
-          <input name='picture' onChange={handleChange} type="text" value={state.picture} />
+          <input name='picture' onChange={handleChange} type="text" value={state.picture} placeholder='Insert URL'/>
           <label>{error.picture}</label>
         </div>
 
@@ -186,7 +187,7 @@ const PostActivity = () => {
 
         <div>
           <label>Duration in hours: </label>
-          <input name='duration' onChange={handleChange} type="text" value={state.duration} />
+          <input name='duration' onChange={handleChange} type="text" value={state.duration} placeholder='Type how many hours avg.' />
           <label>{error.duration}</label>
         </div>
 
@@ -210,7 +211,7 @@ const PostActivity = () => {
           <div>
             {
               state.countries?.map((c) => <div>
-                <label key={state.name}>{c}</label> <button name='countries' id={c} onClick={handleDelete}>x</button>
+                <label key={state.name}>{c}</label> <button name='countries' id={c} type='button' onClick={handleDelete}>x</button>
               </div>)
             }
           </div>

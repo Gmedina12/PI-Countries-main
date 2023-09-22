@@ -35,12 +35,12 @@ const Countries = () => {
 
 
    const filteredCountries = countries.slice(currentPage, currentPage + 10);
-   console.log(filteredCountries)
    return (
       <div className={style.renderContainer}>
          <div className={style.filterButtons}>
             <button onClick={firstPage}> ⏮️ </button>
             <button onClick={prevPage}>  ◀️  </button>
+            <button onClick={currentPage}>{currentPage/10+1}</button>
             <button onClick={nextPage}>  ▶️  </button>
             <button onClick={lastPage}>  ⏭️ </button>
          </div>
@@ -53,11 +53,13 @@ const Countries = () => {
                      flags={countryElement.flags}
                      name={countryElement.name}
                      continents={countryElement.continents}
+                     population={countryElement.population}
                   />))}
          </div>
          <div className={style.filterButtons}>
             <button onClick={firstPage}> ⏮️ </button>
             <button onClick={prevPage}>  ◀️  </button>
+            <button onClick={currentPage}>{currentPage/10+1}</button>
             <button onClick={nextPage}>  ▶️  </button>
             <button onClick={lastPage}>  ⏭️ </button>
          </div>
