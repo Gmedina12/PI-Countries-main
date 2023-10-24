@@ -37,19 +37,28 @@ const PostActivity = () => {
     console.log(name)
     switch (name) {
       case 'name':
-        const REGEX_SYMBOL = /[^\w\s]/
-        console.log(REGEX_SYMBOL.test(stateAux.Name))
-        if (REGEX_SYMBOL.test(stateAux.Name)) setError({ ...error, name: 'Symbols are not allowed' })
-        else if (!stateAux.name.length) setError({ ...error, name: 'name is required' })
-        else if (stateAux.name.length > 30) setError({...error, name: 'Activity name too long'})
-        else setError({ ...error, name: '' })
+   
+         if (!stateAux.name.length) {
+          setError({ ...error, name: 'name is required' })
+        }
+        else if (stateAux.name.length > 30) {
+          setError({...error, name: 'Activity name too long'})
+        }
+        else {
+          setError({ ...error, name: '' })
+        }
         break;
 
       case 'duration':
         if (isNaN(parseInt(stateAux.duration))) {
           setError({ ...error, duration: 'Invalid entry. It must be a number' })
         }
-        if (!stateAux.duration) setError({ ...error, duration: 'How long is your activity? It must be typed' })
+        if (!stateAux.duration) {
+          setError({ ...error, duration: 'How long is your activity? It must be typed' })
+        }
+        else if (stateAux.duration < 1 || stateAux.duration > 24) {
+          setError({ ...error, duration: 'Duration out of range' })
+        }
         else setError({ ...error, duration: '' })
         break;
 
@@ -60,7 +69,12 @@ const PostActivity = () => {
         } else {
           setError({ ...error, picture: '' })
         }
-        break
+        break;
+
+        case 'difficulty':
+          if (!stateAux.difficulty) setError({ ...error, difficulty: 'Select how hard is it?' })
+          else setError({ ...error, difficulty: '' })
+          break;
 
       case 'season':
         if (!stateAux.season) setError({ ...error, season: 'Please, select a season. We need to know when to enjoy this activity' })
@@ -218,7 +232,7 @@ const PostActivity = () => {
           <label>{error.countries}</label>
         </div>
 
-        {handlerDisable ? <input disabled type="submit" /> : <input type="submit" />}
+        {handlerDisable ? <button disabled /> : <button>Submit</button>}
       </form>
     </div>
   )

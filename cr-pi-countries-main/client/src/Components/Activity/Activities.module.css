@@ -1,5 +1,31 @@
+.activityContainer{
+    padding: 3px 10px;
+    border: PowderBlue 5px solid;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    justify-content: center;
+}
+
 .activitiesContainer{
     padding-top: 150px;
     width: 100vw;
     height: 100vh;
+    justify-content: center;
 }
+
+/* imagen */
+.medium{ 
+    max-width: 210px ;
+    max-height: 190px ;
+    display: block;
+    
+  }
+
+  /* contenedor de imagen */
+  .contenedor {
+    max-width: 210px; 
+    max-height: 190px; 
+    border: 1px solid #ffffff; 
+    display: block;
+    justify-content: center;
+  }

@@ -40,7 +40,7 @@ const Countries = () => {
          <div className={style.filterButtons}>
             <button onClick={firstPage}> ⏮️ </button>
             <button onClick={prevPage}>  ◀️  </button>
-            <button onClick={currentPage}>{currentPage/10+1}</button>
+            <button onClick={currentPage}>{Math.ceil(currentPage/10+1)}</button>
             <button onClick={nextPage}>  ▶️  </button>
             <button onClick={lastPage}>  ⏭️ </button>
          </div>
@@ -59,7 +59,7 @@ const Countries = () => {
          <div className={style.filterButtons}>
             <button onClick={firstPage}> ⏮️ </button>
             <button onClick={prevPage}>  ◀️  </button>
-            <button onClick={currentPage}>{currentPage/10+1}</button>
+            <button onClick={currentPage}>{Math.ceil(currentPage/10+1)}</button>
             <button onClick={nextPage}>  ▶️  </button>
             <button onClick={lastPage}>  ⏭️ </button>
          </div>

@@ -13,4 +13,5 @@ background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(171,217,255,1) 
 .homeFilters{
     position: sticky;
     top: 80px;
+    display: flex;
 }
